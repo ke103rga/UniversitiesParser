@@ -4,22 +4,30 @@ import os
 import re
 
 
+cur_dir = os.getcwd()
+
 urls = {"building_url": "https://abit.susu.ru/rating/2022/list.php?35093/2/1",
         "building_unique_url": "https://abit.susu.ru/rating/2022/list.php?35090/2/1"}
 
 entrant_number = "18439"
 
 
-def get_html_file(file_name, url, dir_path="C:/Users/Виктория/PycharmProjects/UniversitiesParser/rates"):
+def get_html_file(file_name, url, dir_path=f"{cur_dir}/rates"):
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
-
 
     with open(f"{dir_path}/{file_name}.html", "w", encoding="utf-8") as file:
         q = requests.get(url)
         text = q.text
 
         file.write(text)
+
+
+def find_speciality(text):
+    pattern = "Направление/специальность"
+    start_index = text.index(pattern) + len(pattern)
+    text = text[start_index:].strip()
+    return text
 
 
 def count_agreements(soup, rate):
@@ -35,13 +43,22 @@ def count_agreements(soup, rate):
     return count
 
 
-def parse_page(html_file, dir_path="C:/Users/Виктория/PycharmProjects/UniversitiesParser/rates"):
-    with open(f"{dir_path}/{html_file}.html", "r", encoding="utf-8") as file:
-        src = file.read()
+def parse_page(url=None, html_file=None, dir_path=f"{cur_dir}/rates"):
+    if html_file:
+        with open(f"{dir_path}/{html_file}.html", "r", encoding="utf-8") as file:
+            src = file.read()
+    elif url:
+        q = requests.get(url)
+        src = q.content
+    else:
+        return {}
 
     soup = BeautifulSoup(src, "lxml")
 
-    rates = {"rate": "", "agreement_rate": ""}
+    rates = {"speciality": "", "rate": "", "agreement_rate": ""}
+
+    speciality_desc = soup.find("h1", string=re.compile("Список подавших документы")).find_next("p").text
+    rates["speciality"] = find_speciality(speciality_desc)
 
     entrant = soup.find("td", string=re.compile(entrant_number)).find_parent("tr")
     rates["rate"] = entrant.find("td", class_="r").text
@@ -54,12 +71,10 @@ def parse_page(html_file, dir_path="C:/Users/Виктория/PycharmProjects/Un
 def parser():
     entrant_info = []
 
-    for name, url in urls.items():
-        get_html_file(name, url)
+    for url in urls.values():
+        entrant_info.append(parse_page(url=url))
 
-        entrant_info.append(parse_page(name))
-
-    print(entrant_info)
+    return entrant_info
 
 
-parser()
+#parser()

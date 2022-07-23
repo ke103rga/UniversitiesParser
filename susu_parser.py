@@ -3,7 +3,6 @@ import requests
 import os
 import re
 
-
 cur_dir = os.getcwd()
 
 urls = {"building_url": "https://abit.susu.ru/rating/2022/list.php?35093/2/1",
@@ -12,9 +11,10 @@ urls = {"building_url": "https://abit.susu.ru/rating/2022/list.php?35093/2/1",
 entrant_number = "18439"
 
 
-def get_html_file(file_name, url, dir_path=f"{cur_dir}/rates"):
+def get_html_file(file_name, url, dir_path="C:/Users/Виктория/PycharmProjects/UniversitiesParser/rates"):
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
+
 
     with open(f"{dir_path}/{file_name}.html", "w", encoding="utf-8") as file:
         q = requests.get(url)
@@ -28,6 +28,13 @@ def find_speciality(text):
     start_index = text.index(pattern) + len(pattern)
     text = text[start_index:].strip()
     return text
+
+
+def get_plan(text):
+    pattern = r"\d+"
+    nums = list(map(int, re.findall(pattern, text)))
+    plan = nums[0]
+    return plan
 
 
 def count_agreements(soup, rate):
@@ -55,10 +62,11 @@ def parse_page(url=None, html_file=None, dir_path=f"{cur_dir}/rates"):
 
     soup = BeautifulSoup(src, "lxml")
 
-    rates = {"speciality": "", "rate": "", "agreement_rate": ""}
+    rates = {"univercity": "ЮУрГУ", "speciality": "", "rate": "", "agreement_rate": "", "plan": ""}
 
-    speciality_desc = soup.find("h1", string=re.compile("Список подавших документы")).find_next("p").text
-    rates["speciality"] = find_speciality(speciality_desc)
+    speciality_desc = soup.find("h1", string=re.compile("Список подавших документы")).find_next("p")
+    rates["speciality"] = find_speciality(speciality_desc.text)
+    rates["plan"] = get_plan(speciality_desc.find_next("p").text)
 
     entrant = soup.find("td", string=re.compile(entrant_number)).find_parent("tr")
     rates["rate"] = entrant.find("td", class_="r").text
@@ -77,4 +85,4 @@ def parser():
     return entrant_info
 
 
-#parser()
+

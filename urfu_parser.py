@@ -1,21 +1,18 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
-import os
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
-from subprocess import CREATE_NO_WINDOW
-
-cur_dir = os.getcwd()
 
 # chrome_options = Options()
 # chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 # chrome_options.add_argument("--headless")
 # chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
-chrome_service = ChromeService(f"{cur_dir}\\chromedriver_win32\\chromedriver.exe")
-chrome_service.creationflags = CREATE_NO_WINDOW
-driver = webdriver.Chrome(service=chrome_service)
+#chrome_service = ChromeService("chromedriver_win32\\chromedriver.exe")
+#chrome_service.creationflags = CREATE_NO_WINDOW
+#driver = webdriver.Chrome(executable_path="chromedriver_win32\\chromedriver.exe")
+driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.set_window_position(100, 150)
 driver.set_window_size(1, 1)
 url = "https://urfu.ru/ru/ratings/"

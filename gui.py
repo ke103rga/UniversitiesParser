@@ -4,9 +4,8 @@ if sys.version_info[0] == 3:
 else:
     import Tkinter as tk
 import pandastable
-import susu_parser
-import urfu_parser
 import pandas as pd
+
 
 
 class TestApp(tk.Frame):
@@ -27,6 +26,8 @@ class TestApp(tk.Frame):
 
 
 def show_table(window):
+    import susu_parser
+    import urfu_parser
     entrant_info = []
     entrant_info.extend(susu_parser.parser())
     entrant_info.extend(urfu_parser.parser())
@@ -46,7 +47,7 @@ def show_table(window):
 def show_result():
     window = tk.Tk()
     window.title("Рейтинг поступающего в разных университетах")
-    window.geometry('850x400')
+    window.geometry('900x450')
     window.resizable(width=0, height=0)
 
     instruction = "После нажатия на кнопку 'Обновиить рейтинг'\n" \
@@ -55,15 +56,18 @@ def show_result():
                   "*Рейтинг - позиция абитурьента в всех списке людей, подавших документы;\n" \
                   "*Рейтинг среди давших согласие - позиция абитурьента в том же списке,\n" \
                   "но только среди людей подавших согласие(более актуальная информация);\n" \
-                  "*План набора - Количество людей, набираемых в этом году по данному направлению."
+                  "*План набора - Количество людей, набираемых в этом году по данному направлению.\n" \
+                  "После нажатия откроется еще несколько окон, \n" \
+                  "к сожалению это необходимо чтобы получить информацию с сайта.\n" \
+                  "Их закрывать не нужно, они сами прекраатят свою работу через несколько секунд."
 
     lbl = tk.Label(window, text=instruction, font=('Times', 15))
-    lbl.place(x=70, y=50)
+    lbl.place(x=80, y=50)
 
     btn = tk.Button(window, text="Обновить рейтинг",
                  height=5, width=20,
                  bg="Gray", fg='White', command=lambda: show_table(window))
-    btn.place(x=340, y=250)
+    btn.place(x=355, y=320)
 
     window.mainloop()
 

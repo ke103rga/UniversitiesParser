@@ -3,7 +3,7 @@ if sys.version_info[0] == 3:
     import tkinter as tk
 else:
     import Tkinter as tk
-from pandastable import Table
+import pandastable
 import susu_parser
 import urfu_parser
 import pandas as pd
@@ -20,8 +20,8 @@ class TestApp(tk.Frame):
         f = tk.Frame(self.main)
         f.pack(fill=tk.BOTH,expand=1)
         df = data
-        self.table = pt = Table(f, dataframe=df,
-                                showtoolbar=True, showstatusbar=True)
+        self.table = pt = pandastable.Table(f, dataframe=df,
+                                           showtoolbar=True, showstatusbar=True)
         pt.show()
         return
 
@@ -47,6 +47,7 @@ def show_result():
     window = tk.Tk()
     window.title("Рейтинг поступающего в разных университетах")
     window.geometry('850x400')
+    window.resizable(width=0, height=0)
 
     instruction = "После нажатия на кнопку 'Обновиить рейтинг'\n" \
                   "перед вами появится таблица,\n" \

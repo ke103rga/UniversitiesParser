@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a689c204-7151-4d08-9e8b-d9f598c5411a" name="Changes" comment="created a working application, but browser UI still dysplays." />
+    <list default="true" id="a689c204-7151-4d08-9e8b-d9f598c5411a" name="Changes" comment="Added an urfu parser">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/urfu_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/urfu_parser.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -188,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658602441243</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added an urfu parser">
+      <created>1658637853121</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1658637853121</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,6 +215,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created a working application, but browser UI still dysplays." />
-    <option name="LAST_COMMIT_MESSAGE" value="created a working application, but browser UI still dysplays." />
+    <MESSAGE value="Added an urfu parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added an urfu parser" />
   </component>
 </project>

@@ -15,7 +15,6 @@ def get_html_file(file_name, url, dir_path="C:/Users/Виктория/PycharmPro
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
 
-
     with open(f"{dir_path}/{file_name}.html", "w", encoding="utf-8") as file:
         q = requests.get(url)
         text = q.text

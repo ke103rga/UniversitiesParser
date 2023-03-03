@@ -5,19 +5,20 @@ import time
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.service import Service as ChromeService
 
-# chrome_options = Options()
-# chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
-#chrome_service = ChromeService("chromedriver_win32\\chromedriver.exe")
-#chrome_service.creationflags = CREATE_NO_WINDOW
-#driver = webdriver.Chrome(executable_path="chromedriver_win32\\chromedriver.exe")
+chrome_options = Options()
+chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
+chrome_service = ChromeService("chromedriver_win32\\chromedriver.exe")
+chrome_service.creationflags = CREATE_NO_WINDOW
+driver = webdriver.Chrome(executable_path="chromedriver_win32\\chromedriver.exe")
+
 driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.set_window_position(100, 150)
 driver.set_window_size(1, 1)
 url = "https://urfu.ru/ru/ratings/"
 
-ENTRANT_SNILS = "16502370438"
+ENTRANT_SNILS = "snils"
 table_ids = ["1279368728", "285468005"]
 
 
